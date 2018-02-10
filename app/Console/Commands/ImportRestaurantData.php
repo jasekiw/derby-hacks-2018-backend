@@ -47,6 +47,8 @@ class ImportRestaurantData extends Command
         $index = 1;
         foreach($lines as $line) {
             $columns = str_getcsv($line);
+            if(count($columns) <= 1)
+                continue;
             $inspection = new Inspection();
             $inspection->EstablishmentID = (int)$columns[0];
             $inspection->InspectionID = (int)$columns[1];
