@@ -14,7 +14,7 @@ class AddInspectionsTable extends Migration
     public function up()
     {
         Schema::create('inspections', function(Blueprint $table) {
-            $table->unsignedInteger('EstablishmentID')->unique();
+            $table->unsignedInteger('EstablishmentID');
             $table->unsignedInteger('InspectionID')->unique();
             $table->string('EstablishmentName');
             $table->string('Address');
@@ -28,6 +28,7 @@ class AddInspectionsTable extends Migration
             $table->unsignedInteger('Score');
             $table->string('Grade');
             $table->string('NameSearch');
+            $table->timestamps();
         });
     }
 

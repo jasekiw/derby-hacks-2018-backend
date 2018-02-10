@@ -43,12 +43,28 @@ class ImportRestaurantData extends Command
         $contents = file_get_contents($csvFileLocation);
         $lines = explode("\r\n", $contents);
         array_shift($lines);
+        $length = count($lines);
+        $index = 1;
         foreach($lines as $line) {
             $columns = str_getcsv($line);
             $inspection = new Inspection();
             $inspection->EstablishmentID = (int)$columns[0];
-
-            var_dump($columns);
+            $inspection->InspectionID = (int)$columns[1];
+            $inspection->EstablishmentName = $columns[2];
+            $inspection->Address = $columns[4];
+            $inspection->City = $columns[6];
+            $inspection->State = $columns[7];
+            $inspection->Zip = $columns[8];
+            $inspection->TypeDescription = $columns[9];
+            $inspection->Latitude = $columns[10];
+            $inspection->Longitude = $columns[11];
+            $inspection->InspectionDate = $columns[12];
+            $inspection->Score = $columns[13];
+            $inspection->Grade = $columns[14];
+            $inspection->NameSearch = $columns[15];
+            $inspection->save();
+            $this->info("imported line " . $index . " of " . $length);
+            $index++;
         }
 
     }
