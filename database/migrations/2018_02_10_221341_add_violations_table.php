@@ -14,7 +14,7 @@ class AddViolationsTable extends Migration
     public function up()
     {
         Schema::create('violations', function(Blueprint $table) {
-            $table->unsignedInteger('business_id');
+            $table->unsignedInteger('business_id')->unique();
             $table->unsignedInteger('date');
             $table->string('code');
             $table->string('description');
