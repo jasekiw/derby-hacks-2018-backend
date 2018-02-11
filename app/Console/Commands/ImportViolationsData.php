@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Violation;
+use App\Models\Violation;
 use Illuminate\Console\Command;
 
 class ImportViolationsData extends Command

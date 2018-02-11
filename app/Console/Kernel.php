@@ -3,7 +3,10 @@
 namespace App\Console;
 
 use App\Console\Commands\GenerateHeatMapRatings;
+use App\Console\Commands\ImportAllData;
+use App\Console\Commands\ImportBusinesses;
 use App\Console\Commands\ImportRestaurantData;
+use App\Console\Commands\ImportViolationsData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +19,10 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         ImportRestaurantData::class,
-        GenerateHeatMapRatings::class
+        GenerateHeatMapRatings::class,
+        ImportBusinesses::class,
+        ImportViolationsData::class,
+        ImportAllData::class
     ];
 
     /**
