@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 use App\Models\Violation;
 use Illuminate\Http\Request;
 
-class ViolationController extends Controller
+
+
+class PictureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +18,32 @@ class ViolationController extends Controller
      */
     public function index(Request $request)
     {
-        $businessId = $request->get('business_id');
-        $query = Violation::query();
-        if($businessId)
-            $query->where('business_id', $businessId);
-        $query->orderBy('date', 'DESC');
+        $address = $request->get('address');
+        $city = $request->get('city');
+        $state = $request->get('state');
+        $name = $request->get('name');
+        $location = $address . " " . $city . " " . $state . " " . $name;
+        $url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' . urlencode($location) . '&key=AIzaSyAOYeMz6EHVT95i5lvY5fA-_AoZ2qB_wQE';
+        //$url = 'https://google.com';
+        $client = new \GuzzleHttp\Client();
 
-        $query2 = clone $query;
-        $recentDate = $query2->first();
-        if($recentDate)
-            $query->where('date',$recentDate->date);
+        $res = $client->request('GET', $url);
+        $photoReference = $res->getBody()->getContents();
 
-
-
-        return $query->get();
+        $array = json_decode($photoReference, true);
+        $results = $array['results'];
+        $arr = $results[0];
+        $photos = $arr['photos'];
+        if(count($photos) > 0){
+            $photos_arr = $photos[0];
+            $photo_ref = $photos_arr['photo_reference'];
+            $url = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' . $photo_ref . '&key=AIzaSyAOYeMz6EHVT95i5lvY5fA-_AoZ2qB_wQE';
+            $res = $client->request('GET', $url);
+            $photoDetails = $res->getBody()->getContents();
+            return response([ 'image' => base64_encode($photoDetails) ]);
+        }else {
+            return response("No photos found :(",404);
+        }
     }
 
     /**
