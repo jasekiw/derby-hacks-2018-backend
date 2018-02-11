@@ -16,8 +16,17 @@ class ViolationController extends Controller
      */
     public function index(Request $request)
     {
-        $violationId = $request->get('business_id');
+        $businessId = $request->get('business_id');
         $query = Violation::query();
+        if($businessId)
+            $query->where('business_id', $businessId);
+        $query->orderBy('date', 'DESC');
+
+        $query2 = clone $query;
+        $recentDate = $query2->first();
+        $query->where('date',$recentDate->date);
+
+
 
         return $query->get();
     }
