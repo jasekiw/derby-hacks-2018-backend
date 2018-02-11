@@ -2,25 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inspection;
+use App\Models\Business;
 use Illuminate\Http\Request;
 
-class InspectionsController extends Controller
+class BusinessesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $businessId = $request->get('business_id');
-        $query = Inspection::query();
-        if($businessId)
-            $query->where('EstablishmentID', $businessId);
-        $query->orderBy('InspectionDate', 'DESC');
-        return $query->get();
+        return Business::all();
     }
 
     /**
@@ -52,7 +46,7 @@ class InspectionsController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**

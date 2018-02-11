@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Inspection;
+use App\Models\Inspection;
 use Illuminate\Console\Command;
 
 class ImportRestaurantData extends Command

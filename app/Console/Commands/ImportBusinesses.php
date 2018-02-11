@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Business;
+use App\Models\Business;
 use Illuminate\Console\Command;
-use PhpParser\Node\Scalar\String_;
 
 class ImportBusinesses extends Command
 {
@@ -48,6 +47,8 @@ class ImportBusinesses extends Command
         $index = 1;
         foreach($lines as $line) {
             $columns = str_getcsv($line);
+            if(count($columns) <= 1)
+                continue;
             $business = new Business();
             $business->business_id = (int)$columns[0];
             $business->name = (String)$columns[1];
