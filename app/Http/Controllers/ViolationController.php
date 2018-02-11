@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inspection;
+
+use App\Models\Violation;
 use Illuminate\Http\Request;
 
-class InspectionsController extends Controller
+class ViolationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,9 @@ class InspectionsController extends Controller
      */
     public function index(Request $request)
     {
-        $businessId = $request->get('business_id');
-        $query = Inspection::query();
-        if($businessId)
-            $query->where('EstablishmentID', $businessId);
-        $query->orderBy('InspectionDate', 'DESC');
-        $query->limit(1);
+        $violationId = $request->get('business_id');
+        $query = Violation::query();
+
         return $query->get();
     }
 
