@@ -21,3 +21,4 @@ Route::resource('inspections','InspectionsController');
 Route::resource('businesses','BusinessesController');
 Route::resource('heat-map-points','HeatMapPointsController');
 Route::resource('violation', 'ViolationController');
+Route::resource('picture', 'pictureController');
