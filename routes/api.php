@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('inspections','InspectionsController');
 Route::resource('businesses','BusinessesController');
+Route::resource('heat-map-points','HeatMapPointsController');
