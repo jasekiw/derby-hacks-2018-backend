@@ -22,4 +22,4 @@ Route::resource('businesses','BusinessesController');
 Route::resource('heat-map-points','HeatMapPointsController');
 Route::resource('polygon-map-points','PolygonMapPointsController');
 Route::resource('violation', 'ViolationController');
-Route::resource('picture', 'pictureController');
+Route::resource('picture', 'PictureController');
